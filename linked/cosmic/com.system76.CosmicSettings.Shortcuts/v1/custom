@@ -1,0 +1,37 @@
+{
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "f",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "d",
+    ): Minimize,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Return",
+    ): System(Terminal),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "e",
+    ): System(HomeFolder),
+    (
+        modifiers: [
+            Super,
+        ],
+    ): System(Launcher),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "t",
+    ): ToggleSticky,
+}
