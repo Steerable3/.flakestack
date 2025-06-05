@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+      inputs.sops-nix.nixosModules.sops
     ];
 
   # Bootloader.
@@ -19,10 +20,6 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -45,14 +42,6 @@
     LC_TIME = "de_AT.UTF-8";
   };
 
-  # # Setting up fonts
-  # fonts.packages = with pkgs; [ 
-  #   # pkgs.nerd-fonts.jetbrains-mono
-  #   # pkgs.inter
-  #   # pkgs.crimson-pro
-  #   # pkgs.noto-fonts-emoji
-  # ];
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -62,6 +51,7 @@
 
   ## Nvidia graphics config
   services.xserver.videoDrivers = [ "nvidia" ];
+
   hardware = {
     nvidia = {
       open = false;
@@ -76,11 +66,7 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      # extraPackages = with pkgs; [ mesa ];
     };
-
-    # Brightness control
-    # brillo.enable = true;
 
     # Scanner stuff
     sane = {
@@ -91,6 +77,15 @@
       ];
       openFirewall = true;
     };
+  };
+
+  # Secrets managment
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/user/.config/sops/age/keys.txt";
+
+    secrets."samba/media" = {};
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -117,6 +112,21 @@
     backupFileExtension = "backup";
   };
 
+  # Mounting 
+  fileSystems = let
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in  {
+    "/run/media/jacko/LocalDisk" = {
+      device = "/dev/disk/by-uuid/9e79c50e-781e-4bf0-a66f-1a77cdd19b58";
+      fsType = "btrfs";
+    };
+    "/mnt/smb/docker" = {
+      device = "//media/docker";
+      fsType = "cifs";
+      options = ["${automount_opts},credentials=${config.sops.secrets."samba/media".path},uid=1000,gid=1000"];
+    };
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -133,13 +143,7 @@
     hyprshot #screenshot
     hyprpolkitagent
     papirus-icon-theme
-
-    # virt-viewer
-    # spice
-    # spice-gtk
-    # spice-protocol
-    # win-virtio
-    # win-spice
+    sops
   ];
 
   # Programs
@@ -192,7 +196,12 @@
         pkgs.hplip
       ];
     };
-    # system-config-printer.enable = true;
+
+    #Samba Access
+    samba-wsdd = {
+      enable = true;
+      openFirewall = true;
+    };
   };
 
   # Security:

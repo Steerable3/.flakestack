@@ -24,11 +24,7 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/run/media/jacko/LocalDisk" = {
-    device = "/dev/disk/by-uuid/9e79c50e-781e-4bf0-a66f-1a77cdd19b58";
-    fsType = "btrfs";
-  };
-
+  
   swapDevices =
     [ { device = "/dev/disk/by-uuid/4e1fc11e-9ddf-4355-88f5-fd5e390dcf15"; }
     ];

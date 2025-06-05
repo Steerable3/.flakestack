@@ -97,6 +97,11 @@
 
   home.sessionVariables = {
     SSH_AUTH_SOCK = "/home/jacko/.bitwarden-ssh-agent.sock";
+
+    # Sudoedit
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    SUDO_EDITOR = "nvim";
   };
 
   news.display = "silent"; # Disables news notifications
