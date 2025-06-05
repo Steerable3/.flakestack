@@ -115,15 +115,34 @@
   # Mounting 
   fileSystems = let
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      uid = toString config.users.users.jacko.uid;
+      gid = toString config.users.groups.users.gid;
       in  {
     "/run/media/jacko/LocalDisk" = {
       device = "/dev/disk/by-uuid/9e79c50e-781e-4bf0-a66f-1a77cdd19b58";
       fsType = "btrfs";
     };
-    "/mnt/smb/docker" = {
-      device = "//media/docker";
+    "/run/media/jacko/Docker" = {
+      device = "//media/Docker";
       fsType = "cifs";
-      options = ["${automount_opts},credentials=${config.sops.secrets."samba/media".path},uid=1000,gid=1000"];
+      options = [
+        "${automount_opts}"
+        "credentials=${config.sops.secrets."samba/media".path}"
+        "uid=${uid}"
+        "gid=${gid}"
+        "vers=3.0"
+      ];
+    };
+    "/run/media/jacko/Data" = {
+      device = "//media/Data";
+      fsType = "cifs";
+      options = [
+        "${automount_opts}"
+        "credentials=${config.sops.secrets."samba/media".path}"
+        "uid=${uid}"
+        "gid=${gid}"
+        "vers=3.0"
+      ];
     };
   };
 
@@ -144,6 +163,8 @@
     hyprpolkitagent
     papirus-icon-theme
     sops
+    cifs-utils
+    wl-clipboard
   ];
 
   # Programs
