@@ -68,7 +68,8 @@
   #Imports all necessary home-manager modules
   imports = [
     ../../modules/home-manager/desktop-enviorment/hyprland.nix
-    ../../modules/home-manager/desktop-enviorment/hyprpanel.nix
+    # ../../modules/home-manager/desktop-enviorment/hyprpanel.nix
+    ../../modules/home-manager/desktop-enviorment/waybar.nix
     ../../modules/home-manager/desktop-enviorment/hyprlock.nix
     ../../modules/home-manager/desktop-enviorment/hypridle.nix
     ../../modules/home-manager/desktop-enviorment/stylix.nix
