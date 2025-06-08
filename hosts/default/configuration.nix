@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 {
@@ -122,7 +118,7 @@
       device = "/dev/disk/by-uuid/9e79c50e-781e-4bf0-a66f-1a77cdd19b58";
       fsType = "btrfs";
     };
-    "/run/media/jacko/Docker" = {
+    "/mnt/Docker" = {
       device = "//media/Docker";
       fsType = "cifs";
       options = [
@@ -133,7 +129,7 @@
         "vers=3.0"
       ];
     };
-    "/run/media/jacko/Data" = {
+    "/mnt/jacko/Data" = {
       device = "//media/Data";
       fsType = "cifs";
       options = [
@@ -156,13 +152,14 @@
     ghostty
     fzf
     nemo
+    xfce.thunar
+    xfce.tumbler
     wget
     tealdeer
     libnotify
     hyprshot #screenshot
-    hyprpolkitagent
     papirus-icon-theme
-    sops
+    # sops
     cifs-utils
     wl-clipboard
   ];
@@ -175,11 +172,6 @@
     };
 
     fish.enable = true;
-
-    # localsend = {
-    #   enable = true;
-    #   openFirewall = true;
-    # };
 
     virt-manager.enable = true;
 
@@ -244,9 +236,6 @@
 
     spiceUSBRedirection.enable = true;
   };
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   networking.firewall = {

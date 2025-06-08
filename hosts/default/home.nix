@@ -93,6 +93,8 @@
       enable = true;
       indicator = true;
     };
+
+    hyprpolkitagent.enable = true;
   };
 
   home.sessionVariables = {
