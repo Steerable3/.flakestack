@@ -64,8 +64,8 @@
       };
 
       decoration = {
-        rounding = 3;
-        rounding_power = 3;
+        # rounding = 3;
+        # rounding_power = 3;
         active_opacity = 1.0;
         inactive_opacity = 0.9;
         # border_part_of_window = false;
@@ -203,10 +203,10 @@
         "3, monitor:DP-1"
         "4, monitor:DP-1"
         "5, monitor:DP-1"
-        # "6, monitor:DP-1"
-        # "7, monitor:DP-1"
-        # "8, monitor:DP-1"
-        # "9, monitor:DP-1"
+        "6, monitor:DP-1"
+        "7, monitor:DP-1"
+        "8, monitor:DP-1"
+        "9, monitor:DP-1"
         "10, deafult:HDMI-A-1, monitor:HDMI-A-1"
       ];
     };

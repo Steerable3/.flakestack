@@ -94,6 +94,7 @@
       "libvirtd"
       "scanner"
       "lp"
+      "adbusers"
     ];
     packages = with pkgs; [];
     shell = pkgs.fish;
@@ -176,6 +177,8 @@
     virt-manager.enable = true;
 
     system-config-printer.enable = true;
+
+    adb.enable = true;
     };
 
   # Serivces:

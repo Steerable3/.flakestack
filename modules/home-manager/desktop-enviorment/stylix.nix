@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   stylix = {
@@ -9,22 +9,22 @@
     polarity = "either";
     # Sets theme
     base16Scheme = {
-      base00 = "1e1e1c";
-      base01 = "2f2f2d";
-      base02 = "474540";
-      base03 = "605c55";
-      base04 = "9a8f84";
-      base05 = "c2b8ac";
-      base06 = "e0d6cc";
-      base07 = "f7f0e9";
-      base08 = "b35c50";
-      base09 = "cc7832";
-      base0A = "d8b441";
-      base0B = "8c9440";
-      base0C = "5d9e77";
-      base0D = "c8ad5c";
-      base0E = "b79c6a";
-      base0F = "b7a894";
+      base00 = "272e33";
+      base01 = "2e383c";
+      base02 = "414b50";
+      base03 = "859289";
+      base04 = "9da9a0";
+      base05 = "d3c6aa";
+      base06 = "edeada";
+      base07 = "fffbef";
+      base08 = "e67e80";
+      base09 = "e69875";
+      base0A = "dbbc7f";
+      base0B = "a7c080";
+      base0C = "83c092";
+      base0D = "7fbbb3";
+      base0E = "d699b6";
+      base0F = "9da9a0";
     };
        
     targets = {

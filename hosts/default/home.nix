@@ -44,6 +44,7 @@
     nitch
     simple-scan
     ocrmypdf
+    universal-android-debloater
   ];
 
   xdg.mimeApps = {
