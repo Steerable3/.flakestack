@@ -3,14 +3,14 @@
 {
   services = {
 
-    darkman = {
-      enable = true;
-      settings = {
-        lat = 46.2;
-        lang = 14.3;
-        usegeoclue = false;
-      };
-    };
+    # darkman = {
+    #   enable = true;
+    #   settings = {
+    #     lat = 46.2;
+    #     lang = 14.3;
+    #     usegeoclue = false;
+    #   };
+    # };
 
     wluma = {
       enable = true;

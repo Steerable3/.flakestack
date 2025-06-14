@@ -147,6 +147,7 @@
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, workspace, 10"
+        "$mainMod, grave, workspace, 11"
 
         # Move active window to a workspace with mainMod + SHIFT + [0-9]
         "$mainMod SHIFT, 1, movetoworkspace, 1"
@@ -159,6 +160,7 @@
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
+        "$mainMod SHIFT, grave, movetoworkspace, 11"
 
         # Example special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
@@ -207,7 +209,8 @@
         "7, monitor:DP-1"
         "8, monitor:DP-1"
         "9, monitor:DP-1"
-        "10, deafult:HDMI-A-1, monitor:HDMI-A-1"
+        "10, monitor:DP-1"
+        "11, deafult:HDMI-A-1, monitor:HDMI-A-1"
       ];
     };
 

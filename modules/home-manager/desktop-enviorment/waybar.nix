@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.waybar = {
@@ -11,7 +11,7 @@
         position = "top";
         fixed-center = true;
 
-        spacing = 0;
+        spacing = 5;
         margin-top = 4;
         margin-right = 4;
         margin-left = 4;
@@ -22,16 +22,17 @@
         ];
 
         modules-center = [
-          "clock"
+          "hyprland/window"
         ];
 
         modules-right = [
           "tray"
-          "pulseaudio"
-          "cpu_text"
-          "cpu"
-          "memory"
           "battery"
+          "custom/monitor1"
+          "custom/monitor2"
+          "network"
+          "pulseaudio"
+          "clock"
           "custom/notification"
         ];
 
@@ -40,9 +41,53 @@
           format-en = "EN";
         };
 
+        "group/brightness" = {
+          orientation = "horizontal";
+          modules = [
+            "custom/monitor-icon"
+            "custom/monitor1"
+            "custom/monitor2"
+          ];
+          drawer = {
+            transition-left-to-right = false;
+            transition-duration = 500;
+          };
+        };
+
+        "custom/monitor-icon" = {
+          format = "<span size='xx-large'> 󱡶</span>";
+          tooltip = false;
+        };
+
+        "custom/monitor1" = {
+          format = "<span rise='3000'>{percentage}% </span><span size='xx-large'>{icon}</span>1";
+          format-icons = ["󰃞" "󰃝" "󰃠"];
+          return-type = "json";
+          exec = "ddcutil --bus 4 getvcp 10 | grep -oP 'current.*?=\\s*\\K[0-9]+' | xargs -I{} echo '{\"percentage\":{}}'";
+          on-scroll-up = "ddcutil --noverify --bus 4 setvcp 10 + 10";
+          on-scroll-down = "ddcutil --noverify --bus 4 setvcp 10 - 10";
+          on-click = "ddcutil --noverify --bus 4 setvcp 10 0";
+          on-click-right = "ddcutil --noverify --bus 4 setvcp 10 100";
+          interval = 1;
+          tooltip = false;
+        };
+
+        "custom/monitor2" = {
+          format = "<span rise='3000'>{percentage}% </span><span size='xx-large'>{icon}</span>2";
+          format-icons = ["󰃞" "󰃝" "󰃠"];
+          return-type = "json";
+          exec = "ddcutil --bus 3 getvcp 10 | grep -oP 'current.*?=\\s*\\K[0-9]+' | xargs -I{} echo '{\"percentage\":{}}'";
+          on-scroll-up = "ddcutil --noverify --bus 3 setvcp 10 + 10";
+          on-scroll-down = "ddcutil --noverify --bus 3 setvcp 10 - 10";
+          on-click = "ddcutil --noverify --bus 3 setvcp 10 0";
+          on-click-right = "ddcutil --noverify --bus 3 setvcp 10 100";
+          interval = 1;
+          tooltip = false;
+        };
+
         "custom/notification" = {
           tooltip = false;
-          format = "{icon}";
+          format = "<span size='xx-large'>{icon}</span> ";
           format-icons = {
             notification = "󱅫";
             none = "󰂚";
@@ -66,72 +111,58 @@
           tooltip = false;
         };
 
+        network = {
+          format-ethernet = "<span rise='3000'>{ipaddr}/{cidr} </span><span size='xx-large'>󰈀</span>";
+          format-wifi = "<span rise='3000'>{essid} </span><span size='xx-large'></span>";
+          format-disconnected = "<span rise='3000'>Disconnected </span><span size='xx-large'>󱘖</span>";
+          tooltip-format = "↑ {bandwidthUpBits} ↓ {bandwidthDownBits}";
+        };
+
         clock = {
-          format = "{:%H:%M - %a, %b %d %Y}";
+          format = "{:%H:%M}";
           tooltip = true;
         };
-
-        cpu = {
-          format = "󰻠 : {usage}%";
-          interval = 2;
-
-          states = {
-            critical = 90;
-          };
-        };
-
-        memory = {
-          format = " : {percentage}%";
-          interval = 2;
-
-          states = {
-            critical = 80;
-          };
-
-          tooltip = true;
-        };
-
-        battery = {
-          format = "battery {capacity}%";
-          interval = 5;
-
-          states = {
-            warning = 20;
-            critical = 10;
-          };
-
-          tooltip = false;
-        };
-
+        
         pulseaudio = {
-          format = "{icon} : {volume}%";
-          format-muted = "󰖁 : {volume}%";
+          format = "<span rise='3000'>{volume}% </span><span size='xx-large'>{icon}</span>";
+          format-muted = "<span size='xx-large'></span>";
+          format-bluetooth = "<span rise='3000'>{volume}% </span><span size='xx-large'>󰂱{icon}</span>";
           format-icons = {
             default = [
-              "󰕿"
-              "󰖀"
-              "󰕾"
+              ""
+              ""
+              ""
             ];
+          };
+          scroll-step = 5;
+        };
+
+        "hyprland/window" = {
+          format = "{title}";
+          separate-outputs = true;
+          icon = true;
+          rewrite = {
+            
           };
         };
 
         "hyprland/workspaces" = {
-          format = "<span size='x-large'>{icon}</span>";
+          format = "<span size='xx-large'>{icon}</span>";
           persistent-workspaces = {
             "*" = 12;
             DP-1 = [ 1 2 3 4 5 ];
-            HDMI-A-1 = [ 10 ];
+            HDMI-A-1 = [ 11 ];
           };
           format-icons = {
-            default = "󱓼";
-            active = "󱓻";
-            empty = "";
-            urgent = "󱨈";
+            default = "󰨔";
+            active = "󰨕";
+            empty = "󰝣";
+            urgent = "󱋮";
           };
         };
       }
     ];
 
-    style = ./style.css;
+    style = lib.mkDefault ./style.css;
   };
 }

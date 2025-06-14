@@ -22,7 +22,7 @@
       base0A = "dbbc7f";
       base0B = "a7c080";
       base0C = "83c092";
-      base0D = "7fbbb3";
+      base0D = "d3c6aa";
       base0E = "d699b6";
       base0F = "9da9a0";
     };

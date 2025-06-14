@@ -21,7 +21,7 @@
 
   home.packages = with pkgs; [
     newsflash
-    hardinfo2 #hardware information
+    hyprsysteminfo #hardware information
     logseq
     obsidian
     tenacity #audio editor
@@ -45,6 +45,8 @@
     simple-scan
     ocrmypdf
     universal-android-debloater
+    ddcutil
+    hyprpicker
   ];
 
   xdg.mimeApps = {
@@ -97,6 +99,8 @@
     };
 
     hyprpolkitagent.enable = true;
+
+    swaync.enable = true;
   };
 
   home.sessionVariables = {
@@ -107,6 +111,8 @@
     VISUAL = "nvim";
     SUDO_EDITOR = "nvim";
   };
+  
+  programs.fuzzel.enable = true;
 
   news.display = "silent"; # Disables news notifications
 

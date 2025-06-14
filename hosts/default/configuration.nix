@@ -73,6 +73,8 @@
       ];
       openFirewall = true;
     };
+
+    i2c.enable = true;
   };
 
   # Secrets managment
