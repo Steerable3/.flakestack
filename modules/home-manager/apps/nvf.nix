@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ inputs, ... }:
 
 {
   imports = [ inputs.nvf.homeManagerModules.default ];

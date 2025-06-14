@@ -13,7 +13,7 @@
       "$mainMod" = "SUPER";
       "$terminal" = "ghostty";
       "$fileManager" = "nemo";
-      "$menu" = "rofi -show drun";
+      "$menu" = "pkill rofi || rofi -show drun";
       "$browser" = "zen";
 
       # Sets up all the monitors
@@ -126,8 +126,8 @@
         "ALT, SPACE, exec, $menu" # Launch app launcher
 
         # Screenshots
-        ", Print, exec, hyprshot -m window"
-        "SHIFT, Print, exec, hyprshot -m region"
+        ", Print, exec, hyprshot -m region"
+        "SHIFT, Print, exec, hyprshot -m window"
         "ALT_SHIFT, Print, exec, hyprshot -m output"
 
         # Move focus with mainMod + arrow keys

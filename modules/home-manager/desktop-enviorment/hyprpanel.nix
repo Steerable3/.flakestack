@@ -1,6 +1,5 @@
-{ inputs, config, ... }: 
+{ inputs, ... }: 
 let
-  colors = config.lib.stylix.colors;
   menuScaling = 70;
 in {
   imports = [

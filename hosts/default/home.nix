@@ -112,8 +112,6 @@
     SUDO_EDITOR = "nvim";
   };
   
-  programs.fuzzel.enable = true;
-
   news.display = "silent"; # Disables news notifications
 
   # Let Home Manager install and manage itself.

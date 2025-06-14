@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   programs.waybar = {
@@ -108,6 +108,7 @@
 
         tray = {
           spacing = 10;
+          show-passive-items = true;
           tooltip = false;
         };
 
@@ -162,7 +163,5 @@
         };
       }
     ];
-
-    style = lib.mkDefault ./style.css;
   };
 }
